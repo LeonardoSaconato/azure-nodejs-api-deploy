@@ -4,14 +4,17 @@ Este repositório contém um script automatizado para realizar o deploy de uma A
 
 ## Estrutura do Projeto
 
-api-deploy-azure/ ├── app.js ├── package.json ├── README.md ├── nginx.conf ├── deploy.sh ├── .gitignore
-
-php
-Copiar
+api-deploy-azure/
+├── app.js
+├── package.json
+├── README.md
+├── nginx.conf
+├── deploy.sh
+├── .gitignore
 
 ## Arquivos
 
-### 1. `deploy.sh`
+1. `deploy.sh`
 
 Este script automatiza o processo de criação da VM no Azure, configuração do Nginx e deploy de uma API Node.js. Ele cria a infraestrutura necessária no Azure, configura o Nginx e executa a API.
 
