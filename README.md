@@ -1,22 +1,21 @@
 # azure-nodejs-api-deploy
 
-Estrutura do Projeto
+Este repositório contém um script automatizado para realizar o deploy de uma API Node.js na infraestrutura do Azure, configurando uma máquina virtual (VM) Ubuntu, instalando o Nginx como proxy reverso e executando a API na porta 3000.
 
-api-deploy-azure/
-├── app.js
-├── package.json
-├── README.md
-├── nginx.conf
-├── deploy.sh
-├── .gitignore
+## Estrutura do Projeto
 
+api-deploy-azure/ ├── app.js ├── package.json ├── README.md ├── nginx.conf ├── deploy.sh ├── .gitignore
 
-Arquivos
-1. deploy.sh
-Este script automatiza o processo de criação da VM no Azure, configuração do Nginx e deploy de uma API Node.js.
-
-bash
+php
 Copiar
+
+## Arquivos
+
+### 1. `deploy.sh`
+
+Este script automatiza o processo de criação da VM no Azure, configuração do Nginx e deploy de uma API Node.js. Ele cria a infraestrutura necessária no Azure, configura o Nginx e executa a API.
+
+```bash
 #!/bin/bash
 
 # Definindo variáveis
@@ -129,45 +128,13 @@ sshpass -p $VM_PASSWORD ssh -o StrictHostKeyChecking=no $VM_USER@$PUBLIC_IP << E
   echo "API instalada e em execução!"
 
 
-# API Deploy no Azure com Node.js e Nginx
+echo "Deploy concluído!"
 
-## Tecnologias
+2. nginx.conf
+Este arquivo contém a configuração do Nginx para redirecionar o tráfego da porta 80 para a aplicação Node.js, que roda na porta 3000.
 
-- **Node.js**: Para rodar a aplicação.
-- **Nginx**: Usado como proxy reverso para gerenciar o tráfego HTTP.
-- **Azure CLI**: Para provisionar a infraestrutura no Azure.
+nginx
 
-## Como rodar a aplicação
-
-1. Clone o repositório:
-
-   ```bash
-   git clone https://github.com/este-repositorio/api-deploy-azure.git
-   cd api-deploy-azure
-
-Torne o script executável:
-
-bash
-
-chmod +x deploy.sh
-Execute o script:
-
-bash
-
-./deploy.sh
-Acesse a API através do IP público da máquina virtual.
-
-Licença
-Este projeto está licenciado sob a licença MIT.
-
-bash
-
-
-#### 3. `nginx.conf`
-
-Este arquivo contém a configuração do Nginx para redirecionar o tráfego para a aplicação Node.js.
-
-```nginx
 server {
     listen 80;
 
@@ -182,10 +149,11 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
-4. package.json
-Este arquivo define as dependências do projeto e o script de inicialização.
+3. package.json
+Este arquivo define as dependências do projeto e o script de inicialização da API.
 
 json
+
 {
   "name": "api-deploy-azure",
   "version": "1.0.0",
@@ -198,14 +166,15 @@ json
   }
 }
 
-5. .gitignore
+4. .gitignore
 Este arquivo é utilizado para evitar o envio de arquivos desnecessários ao GitHub, como dependências do Node.js.
 
 gitignore
 
 node_modules/
 Passo a Passo para Executar o Script
-Clone o repositório:
+
+##Clone o repositório:
 
 bash
 
@@ -214,20 +183,30 @@ cd api-deploy-azure
 Instalar o sshpass (caso necessário):
 
 bash
+
 sudo apt-get install sshpass
-Tornar o script executável:
+Torne o script executável:
 
 bash
+
 chmod +x deploy.sh
-Executar o script:
+Execute o script:
 
 bash
+
 ./deploy.sh
-Acessar a API: Após a execução do script, o IP público da máquina será exibido no terminal. Acesse a API via navegador ou usando o curl:
+Acesse a API: Após a execução do script, o IP público da máquina será exibido no terminal. Acesse a API via navegador ou usando o curl:
 
 bash
-http://<PUBLIC_IP>
-A resposta será: API funcionando no servidor Linux com Nginx!
 
-Conclusão
-Com este processo automatizado via Azure CLI, você consegue criar uma máquina virtual Linux, instalar as dependências necessárias, configurar o Nginx como proxy reverso e fazer o deploy de uma API Node.js de forma totalmente automatizada.
+http://<PUBLIC_IP>
+A resposta será:
+
+bash
+
+API funcionando no servidor Linux com Nginx!
+Licença
+Este projeto está licenciado sob a licença MIT.
+
+## Conclusão
+Com este processo automatizado via Azure CLI, você consegue criar uma máquina virtual Linux, instalar as dependências necessárias, configurar o Nginx como proxy reverso e fazer o deploy de uma API Node.js de forma totalmente automatizada. Esse procedimento pode ser útil tanto para ambientes de desenvolvimento quanto de produção, proporcionando uma forma rápida e consistente de realizar deploys na Azure.
